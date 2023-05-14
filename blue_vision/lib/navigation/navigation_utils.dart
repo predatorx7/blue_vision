@@ -15,11 +15,13 @@ String _getFullUrlFromRelative(
 
   final state = GoRouterState.of(context);
   final currentUrl = Uri.parse(state.location);
-  String newPath = '${currentUrl.path}/$location'.replaceAll('//', '/');
+
+  String newPath = Uri(pathSegments: [currentUrl.path, location]).toString();
 
   for (final entry in params.entries) {
-    newPath.replaceAll(':${entry.key}', entry.value);
+    newPath = newPath.replaceAll(':${entry.key}', entry.value);
   }
+
   final newUrl = currentUrl.replace(path: newPath, queryParameters: {
     if (addExistingQueryParams) ...currentUrl.queryParameters,
     ...queryParams,

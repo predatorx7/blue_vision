@@ -27,6 +27,7 @@ class HomeScreen extends ConsumerWidget {
 
   static final navigation = _HomeScreenNavigation();
 
+  @override
   Widget build(BuildContext context, WidgetRef ref) {
     ref.listen<HomeScreenState>(
       homeControllerProvider,
